@@ -1,0 +1,60 @@
+STEPS:
+
+0 : splash welcome screen
+
+1. run/ launch MusicPlayer
+
+// 2. PROMPT user: choose 1. Genre,
+
+-IF Genre:
+    PROMPT: "CHOOSE b.W THESE GENRES: 1. 2. 3. 4. 5. 6.ALL OR 7. QUIT"
+    -- "Quitting Music Player" & Kill
+        //- LET THEM GO BACK (IF ARTIST FILTER BEING DONE)
+        IF THE CHOOSE SOMETHING:
+        - ERROR:
+            - check if its Integer
+            - check if greater than 7 (options)
+        -SUCCESS:
+            findBy() -- filter
+            PRINT: all from genre
+
+            -Choose an ID is from list OR go back to the Genres
+                - (aka "CHOOSE b.W THESE GENRES: 1. 2. 3. 4. 5. 6.ALL OR 7.QUIT")
+            - ERROR (check if ID is valid)-- reprompt
+                check if its Integer
+                check if its greater then count of songs in list
+            - SUCCCESS:
+                play that song, show player controls Play, Pause, Reset, Loop, Back to PlayList
+                -- BACK TO GENRE LIST aka "THESE ARE THE SONGS OF GENRE X"
+
+Controller:
+
+
+  START MuiscPlayer run(){
+   conrtoller.prompt()
+  }
+
+  Controller.prompt(){}
+  sout -- 'CHOOSE BW 1-7'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//
+-IF ARTIST:
+    PRINT: "HERE IS A LIST OF AVAILABLE ARTISTS"
+    PROMPT:
