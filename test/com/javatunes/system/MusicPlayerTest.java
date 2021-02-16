@@ -1,5 +1,7 @@
 package com.javatunes.system;
 
+import com.javatunes.controller.MusicPlayer;
+
 public class MusicPlayerTest {
     MusicPlayer player;
 

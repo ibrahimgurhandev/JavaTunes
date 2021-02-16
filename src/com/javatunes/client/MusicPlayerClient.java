@@ -1,6 +1,6 @@
 package com.javatunes.client;
 
-import com.javatunes.system.MusicPlayer;
+import com.javatunes.controller.MusicPlayer;
 
 
 import javax.sound.sampled.LineUnavailableException;

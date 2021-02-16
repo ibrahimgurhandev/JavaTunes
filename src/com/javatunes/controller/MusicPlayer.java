@@ -1,4 +1,9 @@
-package com.javatunes.system;
+package com.javatunes.controller;
+
+import com.javatunes.system.Catalog;
+import com.javatunes.system.Genre;
+import com.javatunes.system.PlayButtons;
+import com.javatunes.system.Song;
 
 import javax.sound.sampled.*;
 import java.io.IOException;
