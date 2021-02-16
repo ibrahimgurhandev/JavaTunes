@@ -1,15 +1,15 @@
-package com.javatunes;
+package com.javatunes.system;
 
 public class Song {
     //FIELDS
-    String id;
-    String artist;
-    String title;
-    Genre genre;
-    String url;
+    private String id;
+    private String artist;
+    private String title;
+    private Genre genre;
+    private String url;
 
     //CONSTRUCTOR
-    public Song(String id, String artist, String title, Genre genre, String url){
+    public Song(String id, String title, String artist, Genre genre, String url) {
         setId(id);
         setArtist(artist);
         setTitle(title);
@@ -62,6 +62,6 @@ public class Song {
     @Override
     public String toString() {
 //        return "Song [ ID= " + getId() + ", artist= "+ getArtist() + ", title= '" + getTitle() + "', genre= " + getGenre() + "] ";
-        return " Enter " + getId() + " to play " + "'"+ getTitle()+ "'"+  " by " + "'"+getArtist()+ "'";
+        return " to play " + "'" + getTitle() + "'" + " by " + "'" + getArtist() + "'";
     }
 }
