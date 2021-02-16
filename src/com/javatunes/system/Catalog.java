@@ -1,7 +1,11 @@
 package com.javatunes.system;
 
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Catalog {
     // FIELDS
@@ -32,9 +36,9 @@ public class Catalog {
     /**
      * BUSINESS METHODS
      */
-    public static Collection<Song> findByGenre(Genre genre) {
+    public Collection<Song> findByGenre(Genre genre) {
         //declare a return value
-        Collection<Song> result = catalog.stream()
+        Collection<Song> result = getCatalog().stream()
                 .filter(song -> song.getGenre().equals(genre))
                 .collect(Collectors.toCollection(ArrayList::new));
         return result;
@@ -43,7 +47,7 @@ public class Catalog {
     /**
      * Returns entire catalog.
      */
-    public static Collection<Song> getSongs() {
+    public Collection<Song> getSongs() {
         return Collections.unmodifiableCollection(catalog);
     }
 
