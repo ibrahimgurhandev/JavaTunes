@@ -17,8 +17,9 @@ public class Controller {
         return choice;
     }
 
-    public Song promptForSong(Collection<Song> songList){
-        System.out.print("Please enter the song ID for the song you want to play: ");
+    public Song promptForSong(Collection<Song> songList) {
+        System.out.print("Please enter the song ID or enter B for back: ");
+        String choice = scanner.next();
         Song userSong = null;
         boolean isRun = true;
 //        while (!choice.equalsIgnoreCase("B")) {}
