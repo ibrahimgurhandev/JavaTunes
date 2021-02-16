@@ -16,6 +16,7 @@ public class MusicPlayer {
     private Controller controller = new Controller();
     private Scanner scanner = new Scanner(System.in); //create a scanner to accept user inputs
     public static boolean isFinished = false;
+    public static boolean isRestarted = false;
 
     //CONSTRUCTOR
     public MusicPlayer(){
@@ -24,18 +25,12 @@ public class MusicPlayer {
     //BUSINESS METHOD
 
     public void start() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
-        genreChoice = controller.promptForGenre(); // will return a genre type
-        setSongList(controller.findUserChoice(genreChoice));
-
-        while(!isFinished) {
-            printList();
-            setSongChoice(controller.promptForSong(getSongList()));
-            System.out.println("Downloading song................");
-            System.out.println("Playing " + getSongChoice().getTitle());
+        while(!isRestarted) {
+            genreChoice = controller.promptForGenre(); // will return a genre type
+            setSongList(controller.findUserChoice(genreChoice));
             playSong();
         }
     }
-
 
     public void playSong() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
                 controls.createClip(getSongChoice().url);

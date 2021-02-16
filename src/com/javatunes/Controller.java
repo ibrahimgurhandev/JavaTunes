@@ -21,13 +21,16 @@ public class Controller {
         System.out.print("Please enter the song ID for the song you want to play: ");
         Song userSong = null;
         boolean isRun = true;
-        while (userSong == null ) {
-            if(!isRun){
+//        while (!choice.equalsIgnoreCase("B")) {}
+        while (userSong == null) {
+            if(choice.equalsIgnoreCase("B")){
+                break;
+            }
+            if (!isRun) {
                 System.out.print("Error: You must enter a valid ID: \n");
             }
-            String choice = scanner.next();
-            for(Song song: songList){
-                if(song.getId().equals(choice)){
+            for (Song song : songList) {
+                if (song.getId().equals(choice)) {
                     userSong = song;
                 }
             }
@@ -35,7 +38,6 @@ public class Controller {
         }
         return userSong;
     }
-
 
     //helper methods
     public Collection<Song> findUserChoice(String choiceNum) {

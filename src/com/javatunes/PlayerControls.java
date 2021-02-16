@@ -16,13 +16,14 @@ public class PlayerControls {
         //this loop will accept user input and manipulate clip depending on response
         String playerControl = "";
 
-        while(!playerControl.equalsIgnoreCase("Q")){
+        while (!playerControl.equalsIgnoreCase("Q")) {
+            System.out.println("Playing " + song.getTitle());
             System.out.println("P = Play, S= Stop, R= Reset, Q = Quit");
             System.out.print("Please enter your choice: ");
             playerControl = scanner.next();
-            playerControl= playerControl.toUpperCase();
+            playerControl = playerControl.toUpperCase();
 
-            switch (playerControl){
+            switch (playerControl) {
                 case "P":
                     clip.start();
                     break;
@@ -41,9 +42,7 @@ public class PlayerControls {
                             " P = Play, S= Stop, R= Reset, Q = Quit ");
                     playerControl = scanner.next();
             }
-
         }
-
     }
 
     public void createClip(String url) throws LineUnavailableException, IOException, UnsupportedAudioFileException {
@@ -56,5 +55,4 @@ public class PlayerControls {
         URL songURL = new URL(url);
         return AudioSystem.getAudioInputStream(songURL);
     }
-
 }
