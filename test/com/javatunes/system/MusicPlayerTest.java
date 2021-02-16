@@ -1,11 +1,4 @@
-package com.javatunes;
-
-import org.junit.Before;
-import org.junit.Test;
-
-import java.util.Collection;
-
-import static org.junit.Assert.*;
+package com.javatunes.system;
 
 public class MusicPlayerTest {
     MusicPlayer player;

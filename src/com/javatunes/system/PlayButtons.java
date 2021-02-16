@@ -1,29 +1,29 @@
-package com.javatunes;
+package com.javatunes.system;
 
 import javax.sound.sampled.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Scanner;
 
-public class PlayerControls {
+public class PlayButtons {
     private Scanner scanner = new Scanner(System.in); //create a scanner to accept user inputs
 
     //FIELDS
-    Clip clip;
+    private Clip clip;
 
     //BUSINESS METHODS
     public void run(Song song) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
         //this loop will accept user input and manipulate clip depending on response
-        String playerControl = "";
+        String buttonPressed = "";
 
-        while (!playerControl.equalsIgnoreCase("Q")) {
-            System.out.println("Playing " + song.getTitle());
-            System.out.println("P = Play, S= Stop, R= Reset, Q = Quit");
+        while (!buttonPressed.equalsIgnoreCase("Q")) {
+            System.out.println("Playing '" + song.getTitle()+ "' by: " + song.getArtist());
+            System.out.println("P = Play, S= Stop(Pause), R= Reset(Play from beginning), Q = Quit");
             System.out.print("Please enter your choice: ");
-            playerControl = scanner.next();
-            playerControl = playerControl.toUpperCase();
+            buttonPressed = scanner.next();
+            buttonPressed = buttonPressed.toUpperCase();
 
-            switch (playerControl) {
+            switch (buttonPressed) {
                 case "P":
                     clip.start();
                     break;
@@ -32,6 +32,7 @@ public class PlayerControls {
                     break;
                 case "R":
                     clip.setMicrosecondPosition(0L);
+                    clip.start();
                     break;
                 case "Q":
                     System.out.println("Quitting Player, Returning to Song List");
@@ -40,7 +41,7 @@ public class PlayerControls {
                 default:
                     System.out.print("Invalid response. Please enter one of the following:" +
                             " P = Play, S= Stop, R= Reset, Q = Quit ");
-                    playerControl = scanner.next();
+                    buttonPressed = scanner.next();
             }
         }
     }
@@ -52,7 +53,7 @@ public class PlayerControls {
     }
 
     //Helper Methods
-    public AudioInputStream createAudioStream(String url) throws IOException, UnsupportedAudioFileException {
+    private AudioInputStream createAudioStream(String url) throws IOException, UnsupportedAudioFileException {
         URL songURL = new URL(url);
         return AudioSystem.getAudioInputStream(songURL);
     }
