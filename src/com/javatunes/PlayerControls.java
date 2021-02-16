@@ -46,6 +46,7 @@ public class PlayerControls {
     }
 
     public void createClip(String url) throws LineUnavailableException, IOException, UnsupportedAudioFileException {
+        System.out.println("Downloading song................");
         clip = AudioSystem.getClip();
         clip.open(createAudioStream(url));
     }

@@ -8,7 +8,7 @@ public class Controller {
     private Scanner scanner = new Scanner(System.in); //create a scanner to accept user inputs
 
     public String promptForGenre() {
-        System.out.print("Please enter a number to choose a genre 1. POP 2.ROCK 3. HIP-HOP 4. COUNTRY 5. TV-TUNES or 6. ALL: ");
+        System.out.print("Please enter a number to choose a genre 1. POP 2.ROCK 3. HIP-HOP 4. COUNTRY 5. TV-TUNES, 6. ALL: or 7. ");
         String choice = scanner.next();
         List<String> correctChoices = new ArrayList<String>(Arrays.asList("1", "2", "3", "4", "5", "6"));
         while (!correctChoices.contains(choice)) {
@@ -19,24 +19,20 @@ public class Controller {
     }
 
     public Song promptForSong(Collection<Song> songList) {
-        System.out.print("Please enter the song ID or enter B for back: ");
-        String choice = scanner.next();
+        String choice;
         Song userSong = null;
-        boolean isRun = true;
-//        while (!choice.equalsIgnoreCase("B")) {}
         while (userSong == null) {
-            if(choice.equalsIgnoreCase("B")){
+            System.out.print("Please enter a valid song ID to play or 'B' to go back to Genres: ");
+            choice =  scanner.next();
+            if(choice.equalsIgnoreCase("b")){
+                MusicPlayer.isFinished = true;
                 break;
-            }
-            if (!isRun) {
-                System.out.print("Error: You must enter a valid ID: \n");
             }
             for (Song song : songList) {
                 if (song.getId().equals(choice)) {
                     userSong = song;
                 }
             }
-            isRun = false;
         }
         return userSong;
     }

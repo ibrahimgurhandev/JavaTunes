@@ -14,18 +14,17 @@ public class MusicPlayer {
     private String genreChoice;
     private Song songChoice;
     private Controller controller = new Controller();
-    private Scanner scanner = new Scanner(System.in); //create a scanner to accept user inputs
     public static boolean isFinished = false;
     public static boolean isRestarted = false;
 
     //CONSTRUCTOR
-    public MusicPlayer(){
+    public MusicPlayer() {
     }
 
     //BUSINESS METHOD
 
     public void start() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
-        while(!isRestarted) {
+        while (!isRestarted) {
             genreChoice = controller.promptForGenre(); // will return a genre type
             setSongList(controller.findUserChoice(genreChoice));
             playSong();
@@ -33,21 +32,22 @@ public class MusicPlayer {
     }
 
     public void playSong() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
-        Song song = null;
-        do{
-            printList();
-            song = controller.promptForSong(getSongList());
-            setSongChoice(song);
-            System.out.println("Downloading song................");
-            controls.createClip(getSongChoice().url);
-            controls.run(getSongChoice());
-        }while(song == null);
-
+        try {
+            while (!isFinished) {
+                printList();
+                setSongChoice(controller.promptForSong(getSongList()));
+                controls.createClip(getSongChoice().url);
+                controls.run(getSongChoice());
+            }
+        } catch (Exception e) {
+            isFinished = false;
+            start();
+        }
     }
 
-    public void printList(){
+    public void printList() {
         Collection<Song> songs = getSongList();
-        for(Song song: songs){
+        for (Song song : songs) {
             System.out.println(song);
         }
     }
@@ -61,18 +61,13 @@ public class MusicPlayer {
         this.songList = songList;
     }
 
-    public Song getSongChoice(){
+    public Song getSongChoice() {
         return songChoice;
     }
 
-    public void setSongChoice(Song songChoice){
-            this.songChoice = songChoice;
+    public void setSongChoice(Song songChoice) {
+        this.songChoice = songChoice;
     }
-
-    /*
-     * INNER-CLASS
-     */
-
 
 
 }
