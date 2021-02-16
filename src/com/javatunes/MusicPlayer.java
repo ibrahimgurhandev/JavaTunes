@@ -33,8 +33,16 @@ public class MusicPlayer {
     }
 
     public void playSong() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
-                controls.createClip(getSongChoice().url);
-                controls.run();
+        Song song = null;
+        do{
+            printList();
+            song = controller.promptForSong(getSongList());
+            setSongChoice(song);
+            System.out.println("Downloading song................");
+            controls.createClip(getSongChoice().url);
+            controls.run(getSongChoice());
+        }while(song == null);
+
     }
 
     public void printList(){
