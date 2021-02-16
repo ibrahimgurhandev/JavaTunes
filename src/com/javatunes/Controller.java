@@ -8,11 +8,11 @@ public class Controller {
     private Scanner scanner = new Scanner(System.in); //create a scanner to accept user inputs
 
     public String promptForGenre() {
-        System.out.print("Please enter a number to choose a genre 1. POP 2.ROCK 3. HIP-HOP 4. COUNTRY 5. TV-TUNES, 6. ALL: or 7. ");
+        System.out.print("Please enter a number to choose a genre 1. POP 2.ROCK 3. HIP-HOP 4. COUNTRY 5. TV-TUNES, 6. ALL: or 7. To Exit ");
         String choice = scanner.next();
-        List<String> correctChoices = new ArrayList<String>(Arrays.asList("1", "2", "3", "4", "5", "6"));
+        List<String> correctChoices = new ArrayList<String>(Arrays.asList("1", "2", "3", "4", "5", "6", "7"));
         while (!correctChoices.contains(choice)) {
-            System.out.print("Error: You must enter a number between 1-6: \n");
+            System.out.print("Error: You must enter a number between 1-7: \n");
             choice = scanner.next();
         }
         return choice;
@@ -58,6 +58,10 @@ public class Controller {
                 break;
             case "6":
                 songList = Catalog.getSongs();
+                break;
+            case "7":
+                System.out.println("Exiting Music Player. GoodBye.");
+                MusicPlayer.isRestarted = true;
                 break;
             default:
                 System.out.print("Error: You must enter a number between 1 - 6. ");
