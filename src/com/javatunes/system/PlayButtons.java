@@ -31,7 +31,7 @@ public class PlayButtons {
                     clip.start();
                     break;
                 case "B":
-                    System.out.println("Returning to Song List");
+                    System.out.println("Returning to Song List......");
                     clip.close();
                     break;
             }

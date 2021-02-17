@@ -49,12 +49,13 @@ public class MusicPlayer {
 
     //prompting methods
     private String promptForGenre() {
-        return prompter.prompt("Please enter a number to choose a genre 1. POP 2.ROCK 3. HIP-HOP 4. COUNTRY 5. TV-TUNES, 6. ALL: or 7. To Exit ", "[1-7]", "Error: You must enter a number between 1-7.");
+        //
+        return prompter.prompt("Please enter a number to choose a genre 1. POP 2. ROCK 3. HIP-HOP 4. COUNTRY 5. TV-TUNES, 6. ALL or Q to Quit Music Player ", "[qQ1-6]", "Error: You must enter a number between 1-6 or Q to Quit.");
     }
 
     private Song promptForSong() {
         String choice;
-        choice = prompter.prompt("Please enter a song ID to play or 'B' to go back to Genres: ", "[b1-7]", "Invalid! Please enter a song ID or 'b'");
+        choice = prompter.prompt("Please enter a song ID to play or 'B' to go back to Genres: ", "[bB1-7]", "Invalid! Please enter a song ID or 'B'");
         Song userSong = null;
         if (choice.equalsIgnoreCase("b")) {
             setFinished(true);
@@ -108,7 +109,7 @@ public class MusicPlayer {
         Integer id = 1;
         for (Song song : getSongList()) {
             songMap.put(id, song);
-            System.out.println("Enter  ID= " + id + song);
+            System.out.println("Enter " + id +" to play " + song);
             id++;
         }
     }

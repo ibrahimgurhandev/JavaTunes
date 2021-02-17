@@ -62,6 +62,6 @@ public class Song {
     @Override
     public String toString() {
 //        return "Song [ ID= " + getId() + ", artist= "+ getArtist() + ", title= '" + getTitle() + "', genre= " + getGenre() + "] ";
-        return " to play " + "'" + getTitle() + "'" + " by " + "'" + getArtist() + "'";
+        return "'" + getTitle() + "'" + " by " + "'" + getArtist() + "'";
     }
 }
