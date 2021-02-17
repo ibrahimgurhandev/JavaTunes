@@ -6,6 +6,7 @@ import com.javatunes.system.*;
 import javax.sound.sampled.*;
 import java.io.IOException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class MusicPlayer {
     //FIELDS
@@ -49,13 +50,14 @@ public class MusicPlayer {
 
     //prompting methods
     private String promptForGenre() {
-        //
-        return prompter.prompt("Please enter a number to choose a genre 1. POP 2. ROCK 3. HIP-HOP 4. COUNTRY 5. TV-TUNES, 6. ALL or Q to Quit Music Player ", "[qQ1-6]", "Error: You must enter a number between 1-6 or Q to Quit.");
+        int countOfGenre = getGenreCount() + 1; //adding "1" for our "ALL" choice
+        return prompter.prompt("Please enter a number to choose a genre 1. POP 2. ROCK 3. HIP-HOP 4. COUNTRY 5. TV-TUNES, 6. ALL or Q to Quit Music Player ", "[qQ1-" + countOfGenre + "]", "Error: You must enter a number between 1-" + countOfGenre +" or Q to Quit.");
     }
 
     private Song promptForSong() {
+        int countOfSongs = getSongList().size();
         String choice;
-        choice = prompter.prompt("Please enter a song ID to play or 'B' to go back to Genres: ", "[bB1-7]", "Invalid! Please enter a song ID or 'B'");
+        choice = prompter.prompt("Please enter a song ID to play or 'B' to go back to Genres: ", "[bB1-"+countOfSongs+"]", "Invalid! Please enter a song ID or 'B'");
         Song userSong = null;
         if (choice.equalsIgnoreCase("b")) {
             setFinished(true);
@@ -112,6 +114,15 @@ public class MusicPlayer {
             System.out.println("Enter " + id +" to play " + song);
             id++;
         }
+    }
+
+    private int getGenreCount(){
+        Collection<Song> songs = catalog.getSongs();
+        int countOfGenre = songs.stream()
+                .collect(Collectors.toCollection(
+                        () -> new TreeSet<Song>((p1, p2) -> p1.getGenre().compareTo(p2.getGenre()))
+                )).size();
+        return countOfGenre;
     }
 
     //ACCESSOR METHODS

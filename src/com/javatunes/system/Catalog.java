@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.stream.Collectors;
 
 public interface Catalog {
+    //
 
     Collection<Song> findByGenre(Genre genre);
     Collection<Song> getSongs();
