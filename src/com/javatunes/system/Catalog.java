@@ -1,51 +1,18 @@
 package com.javatunes.system;
 
-
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.*;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.stream.Collectors;
 
-public class Catalog {
-    // FIELDS
-    private Collection<Song> catalog = new ArrayList<>();
-    private Path dataFilePath;
+public interface Catalog {
 
-    //CONSTRUCTOR
-    public Catalog(String dataFilePath) throws IOException {
-        this.dataFilePath = Path.of(dataFilePath);
-        load();
+    Collection<Song> findByGenre(Genre genre);
+    Collection<Song> getSongs();
+
+    //static factory method
+    public static Catalog get() throws IOException {
+        return new InMemoryCatalog("data/song-data.csv");
     }
 
-    private void load() throws IOException {
-        Files.lines(dataFilePath).forEach(line -> {
-            String[] tokens = line.split(",");
-            String id = tokens[0];
-            String artist = tokens[1];
-            String title = tokens[2];
-            Genre genre = Genre.valueOf(tokens[3]);
-            String url = tokens[4];
-            catalog.add(new Song(id, title, artist, genre, url));
-        });
-    }
-
-    /**
-     * BUSINESS METHODS
-     */
-
-    public Collection<Song> findByGenre(Genre genre) {
-        //declare a return value
-        Collection<Song> result = catalog.stream()
-                .filter(song -> song.getGenre().equals(genre))
-                .collect(Collectors.toList());
-        return result;
-    }
-
-    /**
-     * Returns entire catalog.
-     */
-    public Collection<Song> getSongs() {
-        return Collections.unmodifiableCollection(catalog);
-    }
 }
