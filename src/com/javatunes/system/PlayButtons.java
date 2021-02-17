@@ -11,7 +11,7 @@ public class PlayButtons {
     private Clip clip;
 
     //BUSINESS METHODS
-    public void run(Song song) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+    public void run(Song song) {
         //this loop will accept user input and manipulate clip depending on response
         String buttonPressed = "";
         while (!buttonPressed.equalsIgnoreCase("B")) {
