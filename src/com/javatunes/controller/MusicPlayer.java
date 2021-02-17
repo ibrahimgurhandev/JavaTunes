@@ -17,14 +17,15 @@ public class MusicPlayer {
     private Map<Integer, Song> songMap = new HashMap<>();
     private String genreChoice;
     private Song songChoice;
-    private Prompter prompter = new Prompter(new Scanner(System.in));
+    private Prompter prompter;
     private Catalog catalog = new Catalog("data/song-data.csv");
     private PlayButtons controls = new PlayButtons();
     private boolean isFinished = false;
     private boolean isRestarted = false;
 
     //CONSTRUCTOR
-    public MusicPlayer() throws IOException {
+    public MusicPlayer(Prompter prompter) throws IOException {
+        this.prompter = prompter;
     }
 
     //BUSINESS METHODS

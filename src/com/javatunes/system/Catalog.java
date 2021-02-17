@@ -18,15 +18,15 @@ public class Catalog {
         load();
     }
 
-    public void load() throws NullPointerException, IOException {
+    private void load() throws IOException {
         Files.lines(dataFilePath).forEach(line -> {
             String[] tokens = line.split(",");
-            String id =tokens[0];
+            String id = tokens[0];
             String artist = tokens[1];
-            String title =tokens[2];
+            String title = tokens[2];
             Genre genre = Genre.valueOf(tokens[3]);
             String url = tokens[4];
-            catalog.add(new Song(id,title, artist, genre, url));
+            catalog.add(new Song(id, title, artist, genre, url));
         });
     }
 
@@ -38,9 +38,10 @@ public class Catalog {
         //declare a return value
         Collection<Song> result = catalog.stream()
                 .filter(song -> song.getGenre().equals(genre))
-                .collect(Collectors.toCollection(ArrayList::new));
+                .collect(Collectors.toList());
         return result;
     }
+
     /**
      * Returns entire catalog.
      */
