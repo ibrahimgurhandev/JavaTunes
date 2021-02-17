@@ -1,5 +1,7 @@
 package com.javatunes.system;
 
+import com.apps.util.Prompter;
+
 import javax.sound.sampled.*;
 import java.io.IOException;
 import java.net.URL;
@@ -32,10 +34,6 @@ public class PlayButtons {
                     System.out.println("Returning to Song List");
                     clip.close();
                     break;
-                default:
-                    System.out.print("Invalid response. Please enter one of the following:" +
-                            " P = Play, S= Stop, R= Reset, Q = Quit ");
-                    buttonPressed = scanner.next();
             }
         }
     }
