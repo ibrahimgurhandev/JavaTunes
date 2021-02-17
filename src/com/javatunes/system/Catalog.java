@@ -8,8 +8,9 @@ import java.util.stream.Collectors;
 public interface Catalog {
     //
 
-    Collection<Song> findByGenre(Genre genre);
-    Collection<Song> getSongs();
+    public Collection<Song> findByGenre(Genre genre);
+    public Collection<Song> getSongs();
+
 
     //static factory method
     public static Catalog get() throws IOException {

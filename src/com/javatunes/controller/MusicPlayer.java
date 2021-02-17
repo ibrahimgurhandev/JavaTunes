@@ -28,7 +28,7 @@ public class MusicPlayer {
     //BUSINESS METHODS
     public void start() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
         while (!isRestarted) {
-            genreChoice = promptForGenre(); // will return a genre type
+            genreChoice = promptForGenre(); // will return a String of 1-7 from menu
             setSongList(findUserChoice(genreChoice));
             playSong();
         }

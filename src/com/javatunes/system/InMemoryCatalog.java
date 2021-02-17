@@ -44,4 +44,9 @@ public class InMemoryCatalog implements Catalog{
     public Collection<Song> getSongs() { //Returns entire catalog.
         return Collections.unmodifiableCollection(catalog);
     }
+
+    //ACCESSOR METHODS
+    public Collection<Song> getCatalog() { //THIS IS FOR TESTING
+        return catalog;
+    }
 }

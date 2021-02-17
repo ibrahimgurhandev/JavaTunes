@@ -3,6 +3,7 @@ package com.javatunes.system;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.util.Collection;
 
 import static org.junit.Assert.assertEquals;
@@ -36,12 +37,12 @@ public class InMemoryCatalogTest {
     public void getSongs_shouldReturnAllSongs() {
         Collection<Song> songs = catalog.getSongs();
         assertNotNull(songs); //verify is not null
-        assertEquals(2, songs.size()); //should only have one Song
+        assertEquals(12, songs.size()); //should only have 12 songs
     }
 
     @Test(expected = UnsupportedOperationException.class)
-    public void geSong_shouldThrowUnsupportedOperationException_whenTryingToModify() {
-        Collection<Song> tvs = Catalog.getSongs();
+    public void getSong_shouldThrowUnsupportedOperationException_whenTryingToModify() {
+        Collection<Song> tvs = catalog.getSongs();
         //try to modify the collection
         tvs.add(new Song("-1", "NOT AN ARTIST", "NOT A TITLE", Genre.POP, "NOT A REAL URL"));
     }
