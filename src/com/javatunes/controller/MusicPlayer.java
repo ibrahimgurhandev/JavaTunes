@@ -1,15 +1,11 @@
 package com.javatunes.controller;
 
 import com.apps.util.Prompter;
-import com.javatunes.system.Catalog;
-import com.javatunes.system.Genre;
-import com.javatunes.system.PlayButtons;
-import com.javatunes.system.Song;
+import com.javatunes.system.*;
 
 import javax.sound.sampled.*;
 import java.io.IOException;
 import java.util.*;
-
 
 public class MusicPlayer {
     //FIELDS
@@ -18,7 +14,7 @@ public class MusicPlayer {
     private String genreChoice;
     private Song songChoice;
     private Prompter prompter;
-    private Catalog catalog = new Catalog("data/song-data.csv");
+    private Catalog catalog = Catalog.get();
     private PlayButtons controls = new PlayButtons();
     private boolean isFinished = false;
     private boolean isRestarted = false;
@@ -29,7 +25,6 @@ public class MusicPlayer {
     }
 
     //BUSINESS METHODS
-
     public void start() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
         while (!isRestarted) {
             genreChoice = promptForGenre(); // will return a genre type
@@ -95,7 +90,8 @@ public class MusicPlayer {
             case "6":
                 songList = catalog.getSongs();
                 break;
-            case "7":
+            case "Q":
+            case "q":
                 System.out.println("Exiting Music Player. GoodBye.");
                 setRestarted(true);
                 break;
@@ -143,4 +139,6 @@ public class MusicPlayer {
     public void setRestarted(boolean restarted) {
         isRestarted = restarted;
     }
+
+
 }

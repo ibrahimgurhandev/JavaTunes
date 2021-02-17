@@ -17,7 +17,7 @@ public class PlayButtons {
         //this loop will accept user input and manipulate clip depending on response
         String buttonPressed = "";
         while (!buttonPressed.equalsIgnoreCase("B")) {
-            System.out.println("Playing '" + song.getTitle() + "' by: " + song.getArtist());
+            System.out.println("Ready to Play.... '" + song.getTitle() + "' by: " + song.getArtist());
             buttonPressed = prompter.prompt("<<Play Buttons>> P = Play, S= Stop(Pause), R= Reset(Play from beginning), B = Go Back ", "[bpsrBPSR]", "Invalid response. ");
             switch (buttonPressed.toUpperCase()) {
                 case "P":

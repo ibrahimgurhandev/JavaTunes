@@ -1,4 +1,4 @@
-package com.javatunes.system;
+package com.javatunes.controller;
 
 import com.javatunes.controller.MusicPlayer;
 
