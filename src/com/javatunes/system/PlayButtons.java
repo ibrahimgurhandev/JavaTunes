@@ -13,17 +13,16 @@ public class PlayButtons {
     private Clip clip;
 
     //CONSTRUCTOR
-    public PlayButtons(Prompter prompter){
+    public PlayButtons(Prompter prompter) {
         this.prompter = prompter;
     }
-
 
     //BUSINESS METHODS
     public void run(Song song) {
         //this loop will accept user input and manipulate clip depending on response
         String buttonPressed = "";
+        System.out.println("Ready to Play.... '" + song.getTitle() + "' by: " + song.getArtist());
         while (!buttonPressed.equalsIgnoreCase("B")) {
-            System.out.println("Ready to Play.... '" + song.getTitle() + "' by: " + song.getArtist());
             buttonPressed = prompter.prompt("<<Play Buttons>> P = Play, S= Stop(Pause), R= Reset(Play from beginning), B = Go Back ", "[bpsrBPSR]", "Invalid response. ");
             switch (buttonPressed.toUpperCase()) {
                 case "P":

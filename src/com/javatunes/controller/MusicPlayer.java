@@ -9,20 +9,17 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class MusicPlayer {
+
     //FIELDS
     private Collection<Song> songList;
     private Map<Integer, Song> songMap = new HashMap<>();
     private String genreChoice;
     private Song songChoice;
     private Prompter prompter;
-    private Scanner scanner;
-    private Catalog catalog = Catalog.get();
-
-
-
+    private Catalog catalog = Catalog.get("data/song-data.csv");//load song information from csv file
     public PlayButtons controls = new PlayButtons(new Prompter(new Scanner(System.in)));
-    private boolean isFinished = false;
-    private boolean isRestarted = false;
+    private boolean isFinished = false;//used to check state of song play
+    private boolean isRestarted = false;//keeps the music player open
 
     //CONSTRUCTOR
     public MusicPlayer(Prompter prompter) throws IOException {
@@ -45,7 +42,7 @@ public class MusicPlayer {
     public void playSong() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
         try {
             while (!isFinished) {
-                printList();
+                printListAndCreateMap();
                 setSongChoice(promptForSong());
                 controls.createClip(getSongChoice().getUrl());
                 controls.run(getSongChoice());
@@ -59,9 +56,10 @@ public class MusicPlayer {
     //prompting methods
     private String promptForGenre() {
         int countOfGenre = getGenreCount() + 1; //adding "1" for our "ALL" choice
-        return prompter.prompt("Please enter a number to choose a genre 1. POP 2. ROCK 3. HIP-HOP 4. COUNTRY 5. TV-TUNES, 6. ALL or Q to Quit Music Player ", "[qQ1-" + countOfGenre + "]", "Error: You must enter a number between 1-" + countOfGenre +" or Q to Quit.");
+        return prompter.prompt("Please enter a number to choose a genre 1. POP 2. ROCK 3. HIP-HOP 4. COUNTRY 5. TV-TUNES, 6. ALL or Q to Quit Music Player ", "[qQ1-" + countOfGenre + "]", "Error: You must enter a number between 1-" + countOfGenre + " or Q to Quit.");
     }
 
+    //This is package private just for testing now
     Song promptForSong() {
         String pattern = getRegex();
         String choice;
@@ -79,6 +77,8 @@ public class MusicPlayer {
     }
 
     //helper methods
+
+    //This is package private just for testing now
     Collection<Song> findUserChoice(String choiceNum) {
         Collection<Song> songList = null;
         Genre userGenre = null;
@@ -115,34 +115,37 @@ public class MusicPlayer {
         return songList;
     }
 
-    private void printList() {
+    //This is package private just for testing now
+    void printListAndCreateMap() {
         Integer id = 1;
         for (Song song : getSongList()) {
             songMap.put(id, song);
-            System.out.println("Enter " + id +" to play " + song);
+            System.out.println("Enter " + id + " to play " + song);
             id++;
         }
     }
 
-    int getGenreCount(){
+    //This is package private just for testing now
+    int getGenreCount() {
         Collection<Song> songs = catalog.getSongs();
-        int countOfGenre = songs.stream()
+        int countOfGenre = songs.stream() //Gets distinct Genre count
                 .collect(Collectors.toCollection(
-                        () -> new TreeSet<Song>((p1, p2) -> p1.getGenre().compareTo(p2.getGenre()))
-                )).size();
+                        () -> new TreeSet<Song>((p1, p2) -> p1.getGenre().compareTo(p2.getGenre()))))
+                .size();
         return countOfGenre;
     }
 
-    String getRegex(){
+    //This is package private just for testing now
+    String getRegex() {// regex used in prompter
         int countOfSongs = getSongList().size();
-        return countOfSongs > 9 ? "0?[bB1-9]|1[bB0"+countOfSongs+"]" : "[bB1-"+countOfSongs+"]" ;
+        return countOfSongs > 9 ? "0?[bB1-9]|1[bB0" + countOfSongs + "]" : "[bB1-" + countOfSongs + "]";
     }
 
     //ACCESSOR METHODS
+
     public Collection<Song> getSongList() {
         return songList;
     }
-
 
     public void setSongList(Collection<Song> songList) {
         this.songList = songList;
@@ -163,7 +166,6 @@ public class MusicPlayer {
     public void setFinished(boolean finished) {
         isFinished = finished;
     }
-
 
     public void setRestarted(boolean restarted) {
         isRestarted = restarted;
