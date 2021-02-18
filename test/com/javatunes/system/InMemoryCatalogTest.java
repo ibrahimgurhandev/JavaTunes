@@ -8,18 +8,18 @@ import java.util.Collection;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-   
+
 public class InMemoryCatalogTest {
     //FIXTURES
     Catalog catalog;
-    
+
     @Before
     public void setUp() throws IOException {
-        catalog = Catalog.get();
+        catalog = Catalog.get("data/song-data.csv");
     }
 
     @Test
-    public void load_shouldReturnCorrectSize_whenInstantiated()throws IOException{
+    public void load_shouldReturnCorrectSize_whenInstantiated() throws IOException {
         InMemoryCatalog catalog2 = new InMemoryCatalog("data/song-data.csv");
         assertEquals(12, catalog2.getCatalog().size());
     }
@@ -29,10 +29,11 @@ public class InMemoryCatalogTest {
         Collection<Song> songs = catalog.findByGenre(Genre.POP);
         assertNotNull(songs); //verify is not null
         assertEquals(2, songs.size()); //should only have two songs -- madonna &christina
-        for(Song song: songs){
+        for (Song song : songs) {
             assertEquals(Genre.POP, song.getGenre());
         }
     }
+
     @Test
     public void getSongs_shouldReturnAllSongs() {
         Collection<Song> songs = catalog.getSongs();
@@ -42,8 +43,8 @@ public class InMemoryCatalogTest {
 
     @Test(expected = UnsupportedOperationException.class)
     public void getSong_shouldThrowUnsupportedOperationException_whenTryingToModify() {
-        Collection<Song> tvs = catalog.getSongs();
+        Collection<Song> songs = catalog.getSongs();
         //try to modify the collection
-        tvs.add(new Song("-1", "NOT AN ARTIST", "NOT A TITLE", Genre.POP, "NOT A REAL URL"));
+        songs.add(new Song("-1", "NOT AN ARTIST", "NOT A TITLE", Genre.POP, "NOT A REAL URL"));
     }
 }

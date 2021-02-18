@@ -1,16 +1,15 @@
 package com.javatunes.system;
 
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class InMemoryCatalog implements Catalog{
+public class InMemoryCatalog implements Catalog {
     // FIELDS
     private Collection<Song> catalog = new ArrayList<>();
-    private Path dataFilePath;
+    private Path dataFilePath;// path to csv file
 
     //CONSTRUCTOR
     public InMemoryCatalog(String dataFilePath) throws IOException {
@@ -18,7 +17,7 @@ public class InMemoryCatalog implements Catalog{
         load();
     }
 
-    private void load() throws IOException {
+    private void load() throws IOException { //This method loads data from csv file and creates song catalog
         Files.lines(dataFilePath).forEach(line -> {
             String[] tokens = line.split(",");
             String id = tokens[0];
@@ -30,7 +29,7 @@ public class InMemoryCatalog implements Catalog{
         });
     }
 
-     //BUSINESS METHODS
+    //BUSINESS METHODS
     @Override
     public Collection<Song> findByGenre(Genre genre) {
         //declare a return value
