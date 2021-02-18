@@ -1,5 +1,5 @@
 # Java Tunes
-![](https://i.imgur.com/dL2HqxQ.png)
+![](https://i.imgur.com/Bzbnz8I.png)
 
 
 ###Project Team
