@@ -24,6 +24,10 @@ public class MusicPlayer {
     public MusicPlayer(Prompter prompter) throws IOException {
         this.prompter = prompter;
     }
+    public MusicPlayer(Scanner scanner) throws IOException {
+        this.scanner = scanner;
+    }
+
 
     //BUSINESS METHODS
     public void start() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
@@ -54,10 +58,10 @@ public class MusicPlayer {
         return prompter.prompt("Please enter a number to choose a genre 1. POP 2. ROCK 3. HIP-HOP 4. COUNTRY 5. TV-TUNES, 6. ALL or Q to Quit Music Player ", "[qQ1-" + countOfGenre + "]", "Error: You must enter a number between 1-" + countOfGenre +" or Q to Quit.");
     }
 
-    private Song promptForSong() {
-        int countOfSongs = getSongList().size();
+    Song promptForSong() {
+        String pattern = getRegex();
         String choice;
-        choice = prompter.prompt("Please enter a song ID to play or 'B' to go back to Genres: ", "[bB1-"+countOfSongs+"]", "Invalid! Please enter a song ID or 'B'");
+        choice = prompter.prompt("Please enter a song ID to play or 'B' to go back to Genres: ", pattern, "Invalid! Please enter a song ID or 'B'");
         Song userSong = null;
         if (choice.equalsIgnoreCase("b")) {
             setFinished(true);
@@ -71,7 +75,7 @@ public class MusicPlayer {
     }
 
     //helper methods
-    private Collection<Song> findUserChoice(String choiceNum) {
+    Collection<Song> findUserChoice(String choiceNum) {
         Collection<Song> songList = null;
         Genre userGenre = null;
         switch (choiceNum) {
@@ -116,7 +120,7 @@ public class MusicPlayer {
         }
     }
 
-    private int getGenreCount(){
+    int getGenreCount(){
         Collection<Song> songs = catalog.getSongs();
         int countOfGenre = songs.stream()
                 .collect(Collectors.toCollection(
@@ -125,10 +129,16 @@ public class MusicPlayer {
         return countOfGenre;
     }
 
+    String getRegex(){
+        int countOfSongs = getSongList().size();
+        return countOfSongs > 9 ? "0?[bB1-9]|1[bB0"+countOfSongs+"]" : "[bB1-"+countOfSongs+"]" ;
+    }
+
     //ACCESSOR METHODS
     public Collection<Song> getSongList() {
         return songList;
     }
+
 
     public void setSongList(Collection<Song> songList) {
         this.songList = songList;
@@ -151,6 +161,14 @@ public class MusicPlayer {
     public void setRestarted(boolean restarted) {
         isRestarted = restarted;
     }
+    public PlayButtons getControls() {
+        return controls;
+    }
+
+    public void setControls(PlayButtons controls) {
+        this.controls = controls;
+    }
+
 
 
 }

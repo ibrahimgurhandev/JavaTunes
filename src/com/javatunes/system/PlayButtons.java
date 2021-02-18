@@ -49,4 +49,13 @@ public class PlayButtons {
         URL songURL = new URL(url);
         return AudioSystem.getAudioInputStream(songURL);
     }
+
+    //Accessor methods
+    public Clip getClip() {
+        return clip;
+    }
+
+    public void setClip(Clip clip) {
+        this.clip = clip;
+    }
 }
