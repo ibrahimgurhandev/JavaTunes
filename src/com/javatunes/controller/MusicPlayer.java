@@ -25,10 +25,6 @@ public class MusicPlayer {
     public MusicPlayer(Prompter prompter) throws IOException {
         this.prompter = prompter;
     }
-    public MusicPlayer(Scanner scanner) throws IOException {
-        this.scanner = scanner;
-    }
-
 
     //BUSINESS METHODS
     public void start() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
@@ -54,7 +50,7 @@ public class MusicPlayer {
     }
 
     //prompting methods
-    private String promptForGenre() {
+    String promptForGenre() {
         int countOfGenre = getGenreCount() + 1; //adding "1" for our "ALL" choice
         return prompter.prompt("Please enter a number to choose a genre 1. POP 2. ROCK 3. HIP-HOP 4. COUNTRY 5. TV-TUNES, 6. ALL or Q to Quit Music Player ", "[qQ1-" + countOfGenre + "]", "Error: You must enter a number between 1-" + countOfGenre + " or Q to Quit.");
     }
@@ -159,10 +155,6 @@ public class MusicPlayer {
         this.songChoice = songChoice;
     }
 
-    public boolean isFinished() {
-        return isFinished;
-    }
-
     public void setFinished(boolean finished) {
         isFinished = finished;
     }
@@ -170,14 +162,4 @@ public class MusicPlayer {
     public void setRestarted(boolean restarted) {
         isRestarted = restarted;
     }
-    public PlayButtons getControls() {
-        return controls;
-    }
-
-    public void setControls(PlayButtons controls) {
-        this.controls = controls;
-    }
-
-
-
 }

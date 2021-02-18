@@ -20,10 +20,6 @@ public class MusicPlayerTest {
     private Scanner scanner;
     private Prompter prompter;
 
-    @After
-    public void tearDown() {
-        scanner.close();
-    }
     @Before
     public void setUp() throws IOException {
         player = new MusicPlayer(new Prompter(new Scanner(System.in)));

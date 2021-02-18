@@ -9,8 +9,7 @@ import java.net.URL;
 public class PlayButtons {
     //FIELDS
     private Prompter prompter;
-
-    private Clip clip;
+    private Clip clip;// what allows us to actually play music
 
     //CONSTRUCTOR
     public PlayButtons(Prompter prompter) {
@@ -53,14 +52,5 @@ public class PlayButtons {
     private AudioInputStream createAudioStream(String url) throws IOException, UnsupportedAudioFileException {
         URL songURL = new URL(url);
         return AudioSystem.getAudioInputStream(songURL);
-    }
-
-    //Accessor methods
-    public Clip getClip() {
-        return clip;
-    }
-
-    public void setClip(Clip clip) {
-        this.clip = clip;
     }
 }

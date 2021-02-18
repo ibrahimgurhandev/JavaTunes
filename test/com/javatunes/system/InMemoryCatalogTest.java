@@ -15,7 +15,7 @@ public class InMemoryCatalogTest {
 
     @Before
     public void setUp() throws IOException {
-        catalog = Catalog.get();
+        catalog = Catalog.get("data/song-data.csv");
     }
 
     @Test
@@ -43,8 +43,8 @@ public class InMemoryCatalogTest {
 
     @Test(expected = UnsupportedOperationException.class)
     public void getSong_shouldThrowUnsupportedOperationException_whenTryingToModify() {
-        Collection<Song> tvs = catalog.getSongs();
+        Collection<Song> songs = catalog.getSongs();
         //try to modify the collection
-        tvs.add(new Song("-1", "NOT AN ARTIST", "NOT A TITLE", Genre.POP, "NOT A REAL URL"));
+        songs.add(new Song("-1", "NOT AN ARTIST", "NOT A TITLE", Genre.POP, "NOT A REAL URL"));
     }
 }
