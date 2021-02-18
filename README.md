@@ -16,7 +16,7 @@ JavaTunes is a console based music player that lets you play classic songs right
 
 Built in Java.
 
-###Librarys used
+### Librarys used
 - Prompter - author Jay Rostosky
 - Splash app - author Jay Rostosky
 
