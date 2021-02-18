@@ -15,8 +15,12 @@ public class MusicPlayer {
     private String genreChoice;
     private Song songChoice;
     private Prompter prompter;
+    private Scanner scanner;
     private Catalog catalog = Catalog.get();
-    private PlayButtons controls = new PlayButtons();
+
+
+
+    public PlayButtons controls = new PlayButtons(new Prompter(new Scanner(System.in)));
     private boolean isFinished = false;
     private boolean isRestarted = false;
 
@@ -152,6 +156,9 @@ public class MusicPlayer {
         this.songChoice = songChoice;
     }
 
+    public boolean isFinished() {
+        return isFinished;
+    }
 
     public void setFinished(boolean finished) {
         isFinished = finished;

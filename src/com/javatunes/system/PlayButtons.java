@@ -5,12 +5,18 @@ import com.apps.util.Prompter;
 import javax.sound.sampled.*;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Scanner;
 
 public class PlayButtons {
     //FIELDS
-    private Prompter prompter = new Prompter(new Scanner(System.in));
+    private Prompter prompter;
+
     private Clip clip;
+
+    //CONSTRUCTOR
+    public PlayButtons(Prompter prompter){
+        this.prompter = prompter;
+    }
+
 
     //BUSINESS METHODS
     public void run(Song song) {
